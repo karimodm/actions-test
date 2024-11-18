@@ -13,6 +13,4 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Display branch name
-        run: echo "This PR is from branch: ${{ github.head_ref }}"
 
