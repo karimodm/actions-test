@@ -13,6 +13,5 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Print incoming branch
-        run: |
-          echo "Incoming branch is: ${{ github.head_ref }}"
+      - name: Display branch name
+        run: 'echo "This PR is from branch: ${{ github.head_ref }}"'
