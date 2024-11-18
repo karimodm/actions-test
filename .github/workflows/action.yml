@@ -1,11 +1,14 @@
-name: PR Branch Workflow
+name: Branch Workflow
 
 on:
   pull_request:
     branches:
       - '*'
+  push:
+    branches:
+      - '*'
 
-run-name: PR from branch ${{ github.head_ref }}
+run-name: ${{ github.event_name == 'pull_request' && format('PR from branch {0}', github.head_ref) || format('Push to branch {0}', github.ref_name) }}
 
 jobs:
   build:
@@ -14,4 +17,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Display branch name
-        run: 'echo "This PR is from branch: ${{ github.head_ref }}"'
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "This is a PR from branch: ${{ github.head_ref }}"
+          else
+            echo "This is a push to branch: ${{ github.ref_name }}"
+          fi
