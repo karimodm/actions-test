@@ -1,0 +1,17 @@
+name: PR Branch Workflow
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+run-name: PR from branch ${{ github.head_ref }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Display branch name
+        run: echo "This PR is from branch: ${{ github.head_ref }}"
