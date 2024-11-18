@@ -8,7 +8,8 @@ on:
     branches:
       - '*'
 
-run-name: ${{ github.event_name == 'pull_request' && format('PR from branch {0}', github.head_ref) || format('Push to branch {0}', github.ref_name) }}
+run-name: |
+  ${{ github.event.pull_request && format('PR {0} → {1}: {2}', github.head_ref, github.base_ref, github.event.pull_request.title) || format('{0}: {1}', github.ref_name, github.event.head_commit.message) }}
 
 jobs:
   build:
